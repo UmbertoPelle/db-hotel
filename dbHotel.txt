@@ -28,10 +28,11 @@ GROUP BY
       ⦿ SELECT HOUR(created_at), COUNT(*) FROM prenotazioni GROUP BY hour(created_at)
 JOIN
     • Come si chiamano gli ospiti che hanno fatto più di due prenotazioni?
-      SELECT prenotazioni_has_ospiti.ospite_id , COUNT(*)> 2 , ospiti.name, ospiti.lastname 
+      SELECT prenotazioni_has_ospiti.ospite_id , COUNT(*)AS 'n_prenotazioni' , ospiti.name, ospiti.lastname 
       FROM prenotazioni_has_ospiti 
       JOIN ospiti ON prenotazioni_has_ospiti.ospite_id = ospiti.id
       GROUP BY ospite_id
+      HAVING n_prenotazioni > 2
     • Stampare tutti gli ospiti per ogni prenotazione
       ⦿SELECT prenotazioni.id AS 'id_prenotazione' , ospiti.name, ospiti.lastname
        FROM prenotazioni
